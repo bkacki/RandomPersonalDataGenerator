@@ -1,13 +1,16 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Globalization;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.Net.Http;
+using System.Security;
 
 namespace RandomPersonalDataGenerator
 {
     public class RandomAddress
     {
         private static readonly Random random = new Random();
-        private static readonly HttpClient client = new HttpClient();
+        private readonly HttpClient client = new HttpClient();
         private readonly IConfiguration _configuration;
         private readonly string _apiKey;
 
@@ -104,7 +107,7 @@ namespace RandomPersonalDataGenerator
                 }
             }
 
-            return "Nie udało się znaleźć losowego adresu ulicznego w mieście w Polsce po kilku próbach.";
+            return "Nie udało się znaleźć losowego adresu w mieście w Polsce po kilku próbach.";
         }
 
         private bool IsValidAddress(JToken firstResult, out string address)

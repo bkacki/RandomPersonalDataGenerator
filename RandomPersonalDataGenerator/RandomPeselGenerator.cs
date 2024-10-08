@@ -28,6 +28,11 @@ namespace RandomPersonalDataGenerator
             _randomBirthDayList = new List<DateTime>(dateTimes);
         }
 
+        public RandomPeselGenerator(DateTime dateTime)
+        {
+            _randomBirthDayList.Add(dateTime);
+        }
+
         public string GenerateRandomPesel(Gender gender)
         {
             if (_randomBirthDayList.Count == 0)

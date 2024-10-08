@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RandomPersonalDataGenerator
 {
-    internal class PhoneNumberGenerator
+    public class PhoneNumberGenerator
     {
         private static Random random = new Random();
         private readonly List<int> _phoneNumberPrefixes = new List<int>();

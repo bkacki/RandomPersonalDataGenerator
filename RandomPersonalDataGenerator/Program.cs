@@ -16,18 +16,15 @@ namespace RandomPersonalDataGenerator
             RandomNameGenerator randomNameGenerator = new RandomNameGenerator();
             BirthDateGenerator birthDateGenerator = new BirthDateGenerator();
             RandomAddress randomAddress = new RandomAddress();
+            RandomPeselGenerator randomPeselGenerator = new RandomPeselGenerator();
 
-            var listOfNumbers = phoneNumberGenerator.GenerateRandomPhoneNumber(100);
-            var listOfMaleNames = randomNameGenerator.GenerateRandomNames(Gender.Male, 100);
-            var listOfFemaleNames = randomNameGenerator.GenerateRandomNames(Gender.Female, 100);
+            RandomPerson[] randomPersonArray = new RandomPerson[100];
 
-            var listOfBirthDates = birthDateGenerator.GenerateRandomBirthDates(100);
-            RandomPeselGenerator randomPeselGenerator = new RandomPeselGenerator(listOfBirthDates);
-
-            var listOfPESEL = randomPeselGenerator.GenerateRandomPeselList(Gender.Male, 100);
-
-            for (int i = 0; i < listOfPESEL.Count; i++)
-                Console.WriteLine($"{listOfMaleNames[i],-30}{listOfNumbers[i],-20}{listOfBirthDates[i].ToString("dd-MM-yyyy"),-15}{listOfPESEL[i],-15}{await randomAddress.RandomAddressAsync(),-15}");
+            for(int i=0; i<randomPersonArray.Length;i++)
+                randomPersonArray[i] =  await RandomPerson.CreateAsync(birthDateGenerator, randomAddress, randomNameGenerator, phoneNumberGenerator);
+            
+            foreach(var person in randomPersonArray)
+                Console.WriteLine(person.ToString());
         }
 
         
